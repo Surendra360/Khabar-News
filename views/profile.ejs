@@ -1,0 +1,74 @@
+<%- include("./partials/header") %>
+<%- include("./partials/nav") %>
+
+<div class="w-[100%] flex flex-col items-center justify-center pb-10">
+            <div class="mt-5 flex flex-col items-center">
+                <img class="w-[100px] h-[100px] border rounded-full object-cover object-center" src="<%=user.profileImage%>" alt="">
+                <h2 class="py-1 text-xl font-semibold"><%=user.name%></h2>   
+            </div>
+            <div class="md:w-[60%] w-full bg-teal-50 rounded-xl border shadow-xl p-5 flex flex-col items-center justify-between mt-5">
+                <div class="w-[100%] flex items-center justify-between mt-5">
+                    <div class="flex items-center gap-10">
+                        <div class="flex flex-col gap-1">
+                            <h2 class="font-semibold">@<%=user.username%></h2>
+                            <h2><%=user.email%></h2>
+                        </div>                    
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <h2 class="text-lg font-semibold">Total</h2>
+                        <span><%=user.blogs.length%></span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <a href="/users/editProfile/<%=user._id%>">
+                            <button class="px-2 py-1 bg-green-600 text-white font-semibold hover:bg-green-700 w-[5rem] m-1 rounded border">Edit</button>
+                        </a>
+                        <a href="/users/logout"> 
+                            <button class="px-2 py-1 bg-red-600 text-white font-semibold hover:bg-red-700 w-[5rem] m-1 rounded border">Logout</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a class="md:w-[60%] w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded border shadow-xl py-2 flex items-center justify-center mt-5" href="/users/creatBlog">
+                <button > Create new blog + </button>
+            </a>
+            
+            <div class="md:w-[60%] font-semibold py-2 flex flex-col items-center justify-center gap-5 mt-5">
+                <%user.blogs.forEach((blog)=>{%>
+                    <div class="w-[100%] font-semibold rounded border shadow-xl py-2 px-2 md:flex items-center justify-start mt-5">
+                        <img class="md:w-[15vw] w-full h-full object-cover rounded" src="<%=blog.blogPoster%>" alt="">
+                        <div class="h-full w-full px-5 py-2 flex flex-col items-start justify-between gap-3">
+                            <div class="w-full relative">
+                                <h1 class=" relative text-3xl flex items-center justify-between w-full">
+                                    <div>
+                                        <%=blog.blogTitle.slice(0,20)%>....
+                                    </div>
+                                    <div class="hidden absolute top-0 right-5 flex flex-col gap-3 bg-gray-300 p-2 rounded" id="dotopt">
+                                        <a class="text-red-600 text-sm mr-3" href="/deleteBlog/<%=blog._id%>">Delete</a>
+                                        <a class="text-red-600 text-sm" href="/updateBlogs/<%=blog._id%>">Update</a>
+                                    </div>
+                                    <button class="block text-2xl" id="dot">..</button>
+                                    
+                                </h1>
+                                <span class="p-1 font-normal text-gray-500"><%= blog.createdAt?.toString().slice(0,15) %></span>
+                            </div>
+                            <p class="text-gray-600 font-[400]">
+                               <%=blog.blogContent.slice(0,250)%>....
+                            </p>
+                            <div class="w-full flex justify-between">
+                                <span>Comments: <%=blog.comments.length%></span>
+                                <a class="text-blue-600 hover:text-blue-700" href="/blogReadMore/<%=blog._id%>">Read more..</a>
+                            </div>
+                        </div>
+                    </div>
+                <%})%>
+            </div>
+        </div>
+
+      <script>
+          document.getElementById('dot').addEventListener('click', function() {
+            var dotopt = document.getElementById('dotopt');
+            dotopt.classList.toggle('hidden');
+        }); 
+      </script>  
+
+<%- include("./partials/footer") %>

@@ -1,0 +1,29 @@
+<%- include("./partials/header") %>
+    <%- include("./partials/nav") %>
+
+        <div class="w-[100%] flex flex-col items-center justify-center mt-10 pb-10">
+            <div >
+                <h1 class="text-2xl font-bold border-2xl-black">Update User Details</h1>
+            </div>
+            <div class="md:w-[60%] w-full bg-teal-50 rounded-xl shadow-xl border p-5 flex items-center justify-center mt-10">
+
+                <form class="md:w-[60%] w-full p-5 flex flex-col gap-5" action="/users/createBlog" method="post" enctype="multipart/form-data">
+                    <div class="flex flex-col gap-1">
+                        <label>Poster URL</label>
+                        <input class="border-b border-gray-400 bg-teal-50 p-2 outline-0" type="url" name="blogPoster">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label>Title of Blog</label>
+                        <input class="border-b border-gray-400 bg-teal-50 p-2 outline-0" type="text" name="blogTitle" placeholder="Title">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label>Content</label>
+                        <textarea class="border border-gray-400 bg-teal-50 p-2 outline-0" rows="10" type="text" name="blogContent" placeholder="Write content here....." rows="5"></textarea>
+                    </div>
+                      
+                    <button class="mt-5 bg-blue-500 py-2 rounded text-white font-semibold hover:bg-blue-600">Add Blog</button>
+                </form>
+            </div>
+        </div>
+
+        <%- include("./partials/footer") %>
